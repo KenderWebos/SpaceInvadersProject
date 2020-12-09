@@ -14,7 +14,9 @@ public class Player extends JPanel implements ActionListener, KeyListener
     Timer timer = new Timer(5, this);
     double x=0, y=0, speedX=0, speedY=0;
     
-    public Player(){
+    public Player(int x, int y){
+        this.x = x;
+        this.y = y;
         timer.start();
         addKeyListener(this);
         
@@ -62,6 +64,11 @@ public class Player extends JPanel implements ActionListener, KeyListener
         speedX = 0;
     }
     
+    public void release(){
+        speedY = 0;
+        speedX = 0;
+    }
+    
     @Override
     public void keyPressed(KeyEvent e) {
         int code = e.getKeyCode();
@@ -82,7 +89,7 @@ public class Player extends JPanel implements ActionListener, KeyListener
 
     @Override
     public void keyReleased(KeyEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        release();
     }
     
 }
