@@ -10,7 +10,7 @@ public class Enemy extends GameObject
         super(x, y, speedX, speedY);
         
         isVisible = true;
-        moveRight = false;
+        moveRight = true;
         moveLeft = false;
     }
     

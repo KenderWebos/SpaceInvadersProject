@@ -5,7 +5,11 @@
  */
 package Vista;
 
+import Controlador.Player;
 import java.applet.AudioClip;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.swing.JFrame;
 
 /**
  *
@@ -30,58 +34,90 @@ public class Menu extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
         jToggleButton1 = new javax.swing.JToggleButton();
         jToggleButton2 = new javax.swing.JToggleButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(800, 600));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\kende\\Documents\\GitHub\\SpaceInvadersProject\\SpaceInvadersProject\\src\\RECURSOS\\MainMenu.png")); // NOI18N
-        jLabel1.setText("jLabel1");
-        jLabel1.setToolTipText("");
-        jLabel1.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jToggleButton1.setText("jToggleButton1");
+        jToggleButton1.setText("PLAY");
+        jToggleButton1.setToolTipText("");
         jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jToggleButton1ActionPerformed(evt);
             }
         });
+        jPanel1.add(jToggleButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 320, 490, 100));
 
-        jToggleButton2.setText("jToggleButton2");
+        jToggleButton2.setText("EXIT");
+        jToggleButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jToggleButton2ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jToggleButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 450, 490, 70));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\kende\\Documents\\GitHub\\SpaceInvadersProject\\SpaceInvadersProject\\src\\RECURSOS\\MainMenu.png")); // NOI18N
+        jLabel1.setText("jLabel1");
+        jLabel1.setToolTipText("");
+        jLabel1.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 800, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jToggleButton2)
-                .addGap(245, 245, 245)
-                .addComponent(jToggleButton1))
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 800, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jToggleButton1))
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(274, 274, 274)
-                .addComponent(jToggleButton2)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
+        JFrame ventana = new JFrame();
+        Player player = new Player(380, 500);
+        ventana.add(player);
+        
+        ventana.setTitle("Infinity Invaders (alpha)");
+        ventana.setSize(800,600);
+        ventana.setResizable(false);
+        
+        ventana.setVisible(true);
+        ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        
+        //esconder el menu
+        this.setVisible(false);
+        
+        //poner la musica
+        try{
+            System.out.println("comienza...");
+            Clip clip;
+            clip = AudioSystem.getClip();
+            clip.open(AudioSystem.getAudioInputStream( getClass().getResourceAsStream("/RECURSOS/space_invaders_remix.wav") ));
+            
+            //clip.start();
+        }catch(Exception e){
+            System.out.println("ERROR: "+e);
+        }
+        
+        //
         AudioClip sound;
         sound = java.applet.Applet.newAudioClip(getClass().getResource("/RECURSOS/space_invaders_remix.mp3"));
     }//GEN-LAST:event_jToggleButton1ActionPerformed
+
+    private void jToggleButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton2ActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_jToggleButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -121,6 +157,7 @@ public class Menu extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JToggleButton jToggleButton1;
     private javax.swing.JToggleButton jToggleButton2;
     // End of variables declaration//GEN-END:variables
