@@ -26,7 +26,9 @@ public class Player extends JPanel implements ActionListener, KeyListener
     int BOARD_WIDTH=800;
     int BOARD_HEIGHT=600;
     
-    Enemy enemy[] = new Enemy[50];
+    Enemy enemy[] = new Enemy[10];
+    Casitas casitas[] = new Casitas[9];
+    
     
     Shot shot = new Shot((int)x, (int)y, 5, 5);
     
@@ -41,6 +43,24 @@ public class Player extends JPanel implements ActionListener, KeyListener
         setFocusTraversalKeysEnabled(false);
         
         generarAliens();
+        generarEscudos();
+    }
+    
+    void generarEscudos()
+    {
+        int casitasX = BOARD_WIDTH/10;
+        int casitasY = 420;
+        
+        for (int i = 0; i < casitas.length; i++) {
+            casitas[i] = new Casitas(casitasX, casitasY, 2, 2);
+            casitasX += 40;
+            
+            if ( (i+1) % 3 == 0)
+            {
+                casitasX += BOARD_WIDTH/6;
+                casitasY += 0;
+            }
+        }
     }
     
     void generarAliens()
@@ -48,10 +68,7 @@ public class Player extends JPanel implements ActionListener, KeyListener
         int alienX = 10;
         int alienY = 10;
         
-        int total = 10+oleada*2;
-        int fixedLenght=10;
-        
-        for (int i = 0; i < 10+oleada*2; i++) {
+        for (int i = 0; i < enemy.length+oleada*2; i++) {
             enemy[i] = new Enemy(alienX, alienY, 2, 2);
             alienX += 45;
             if (i == 4+oleada*2) {
@@ -81,19 +98,19 @@ public class Player extends JPanel implements ActionListener, KeyListener
             }
         }
         
-        
-        if (oleadaCompletada) {
-            generarAliens();
-        }
-        
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < enemy.length; i++) {
             if (enemy[i].isVisible) {
                 g2d.fillRect( enemy[i].x, enemy[i].y, 40, 40 );
             }
             //g2d.fillRect(new Ellipse2D.Double(enemy[i].x, enemy[i].y, 40, 40));
         }
         
-        
+        for (Casitas casa : casitas)
+        {
+            if (casa.isVisible) {
+                g2d.fillRect( casa.x, casa.y, 40, 40 );
+            }
+        }
         
     }
     
@@ -170,7 +187,7 @@ public class Player extends JPanel implements ActionListener, KeyListener
     }
     
     public void moveAliens(){
-        for (int i = 0; i < 10+oleada*2; i++) 
+        for (int i = 0; i < enemy.length; i++) 
         {
             if (enemy[i].moveLeft == true) {
                 enemy[i].x -= enemy[i].speedX;
@@ -181,10 +198,10 @@ public class Player extends JPanel implements ActionListener, KeyListener
             }
         }
         
-        for (int i = 0; i < 10+oleada*2; i++) {
+        for (int i = 0; i < enemy.length; i++) {
             if (enemy[i].x > BOARD_WIDTH-55) 
             {
-                for (int j = 0; j < 10+oleada*2; j++) 
+                for (int j = 0; j < enemy.length; j++) 
                 {
                     enemy[j].y += 20;
                     enemy[j].moveLeft = true;
@@ -195,7 +212,7 @@ public class Player extends JPanel implements ActionListener, KeyListener
             
             if (enemy[i].x < 0) 
             {
-                for (int j = 0; j < 10+oleada*2; j++) 
+                for (int j = 0; j < enemy.length; j++) 
                 {
                     enemy[j].y += 20;
                     enemy[j].moveLeft = false;
@@ -206,7 +223,7 @@ public class Player extends JPanel implements ActionListener, KeyListener
         }
         
         boolean tamosListos = false;
-        for (int i = 0; i < 10+oleada*2; i++) 
+        for (int i = 0; i < enemy.length; i++) 
         {
             if (enemy[i].y > 600-45) {
                 tamosListos = true;
@@ -242,7 +259,7 @@ public class Player extends JPanel implements ActionListener, KeyListener
                 cont++;
             }
             
-            if (cont == 10+oleada*2 && !oleadaCompletada) {
+            if (cont == enemy.length && !oleadaCompletada) {
                 oleadaCompletada = true;
                 oleada++;
                 System.out.println("LISTA");

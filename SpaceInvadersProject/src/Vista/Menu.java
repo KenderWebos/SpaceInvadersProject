@@ -103,9 +103,9 @@ public class Menu extends javax.swing.JFrame {
             System.out.println("comienza...");
             Clip clip;
             clip = AudioSystem.getClip();
-            clip.open(AudioSystem.getAudioInputStream( getClass().getResourceAsStream("/RECURSOS/space_invaders_remix.wav") ));
+            clip.open(AudioSystem.getAudioInputStream( getClass().getResourceAsStream("/RECURSOS/MusicaJuego.wav") ));
             
-            //clip.start();
+            clip.start();
         }catch(Exception e){
             System.out.println("ERROR: "+e);
         }
