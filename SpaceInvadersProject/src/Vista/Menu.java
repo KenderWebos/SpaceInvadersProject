@@ -17,9 +17,8 @@ import javax.swing.JFrame;
  */
 public class Menu extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Menu
-     */
+    public Clip clip;
+    
     public Menu() {
         initComponents();
 
@@ -101,18 +100,15 @@ public class Menu extends javax.swing.JFrame {
         //poner la musica
         try{
             System.out.println("comienza...");
-            Clip clip;
+            
             clip = AudioSystem.getClip();
             clip.open(AudioSystem.getAudioInputStream( getClass().getResourceAsStream("/RECURSOS/MusicaJuego.wav") ));
             
             clip.start();
+            
         }catch(Exception e){
             System.out.println("ERROR: "+e);
         }
-        
-        //
-        AudioClip sound;
-        sound = java.applet.Applet.newAudioClip(getClass().getResource("/RECURSOS/space_invaders_remix.mp3"));
     }//GEN-LAST:event_jToggleButton1ActionPerformed
 
     private void jToggleButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton2ActionPerformed
