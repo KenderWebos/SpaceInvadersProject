@@ -60,7 +60,7 @@ public class Menu extends javax.swing.JFrame {
         });
         jPanel1.add(jToggleButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 450, 490, 70));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\kende\\Documents\\GitHub\\SpaceInvadersProject\\SpaceInvadersProject\\src\\RECURSOS\\MainMenu.png")); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/RECURSOS/MainMenu.png"))); // NOI18N
         jLabel1.setText("jLabel1");
         jLabel1.setToolTipText("");
         jLabel1.setVerticalAlignment(javax.swing.SwingConstants.TOP);
